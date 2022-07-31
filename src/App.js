@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useRef, useEffect, useState } from "react";
+import * as tf from "@tensorflow/tfjs";
+import * as posenet from "@tensorflow-models/posenet";
+import Webcam from "react-webcam";
 
 function App() {
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Webcam
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            left: "0",
+            right: "0",
+            marginTop: "auto",
+            textAlign: "center",
+            zIndex: 9,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          }}
+        />
+        <canvas
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: "0",
+            right: "0",
+            textAlign: "center",
+            zIndex: 9,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          }}
+        />
       </header>
     </div>
   );
 }
 
+function getWindowSize() {
+  const { innerWidth, innerHeight } = window;
+  return { innerWidth, innerHeight };
+}
 export default App;
