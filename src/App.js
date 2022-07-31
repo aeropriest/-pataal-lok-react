@@ -83,7 +83,6 @@ function App() {
             zindex: 9,
             width: 640,
             height: 480,
-            visibility: "hidden",
           }}
         />
         <canvas
@@ -96,9 +95,10 @@ function App() {
             right: "0",
             textAlign: "center",
             zIndex: 9,
-            width: 640 / 2,
-            height: 480 / 2,
-            backgroundColor: "rgba(255,0,0,0.5)",
+            width: 640,
+            height: 480,
+            //backgroundColor: "rgba(255,0,0,1)",
+            //transform: [{ scaleX: -1 }],
           }}
         />
       </header>
